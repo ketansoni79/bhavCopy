@@ -1,0 +1,64 @@
+<html>
+          <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          </head>
+
+          <body>
+            <nav class="navbar navbar-inverse bs-dark">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Zerodha test</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                </ul>
+                </div>
+            </nav>
+
+            <div class="container">
+	            <div class="row">
+                    <div class="col-md-8">
+                        <form action="search">
+                            <div class="input-group">
+                                <!-- USE TWITTER TYPEAHEAD JSON WITH API TO SEARCH -->
+                                <input class="form-control" name="name" placeholder="Search by Company name" required>
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+		        <div class="col-md-9">
+    	            <table class="table table-list-search">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Company Code</th>
+                                <th>Open</th>
+                                <th>High</th>
+                                <th>Low</th>
+                                <th>Close</th>
+                            </tr>
+                        </thead>
+
+                        {% for company in data %}
+                        <tbody>
+                            <tr>
+                                <td>{{ company['name'] }}</td>
+                                <td>{{ company['code'] }}</td>
+                                <td>{{ company['open'] }}</td>
+                                <td>{{ company['high'] }}</td>
+                                <td>{{ company['low'] }}</td>
+                                <td>{{ company['close'] }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+		        </div>
+	        </div>
+          </div>
+
+
+
+          </body>
+</html>
