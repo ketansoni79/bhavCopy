@@ -58,7 +58,6 @@ class Index(object):
             c_data = ast.literal_eval(dic)
             if c_name in c_data['name']:
                 data.append(c_data)
-                break
 
         return template.render(data=data)
 
