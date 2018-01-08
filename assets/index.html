@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .date,
+        .year,
+        .month {
+            color: red;
+        
+        }
+        body{
+            background-image: url('assets/wall.jpg')
+        }
+        .navbar-brand{
+            color:#286090 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Zerodha test</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-6">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Bhav Details</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" action="download" onsubmit="return dmyform()">
+                            <fieldset>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="day" placeholder="Enter date(dd)" id="day" max="31" min="01">
+                                    <div class="date"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="month" placeholder="Enter Month(mm)" id="month" max="12" min="01">
+                                    <div class="month"></div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="year" placeholder="Enter Year(yy)" id="year">
+                                    <div class="year"></div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block ">Download BhavCopy</button>
+                                <!-- Change this to a button or input when using this as a form -->
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

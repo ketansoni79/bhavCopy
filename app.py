@@ -9,18 +9,18 @@ env=Environment(loader=FileSystemLoader(CUR_DIR), trim_blocks=True)
 
 class Index(object):
     # Connect to redis database
-    r_db = redis.StrictRedis('localhost', 6379, charset="utf-8", decode_responses=True)
+    r_db = redis.StrictRedis('redis-16491.c14.us-east-1-2.ec2.cloud.redislabs.com', 16491, charset="utf-8", decode_responses=True)
     
     @cherrypy.expose()
     def index(self):
-        template = env.get_template('index.html')
+        template = env.get_template('assets/index.html')
         # RENDER TEMPLATE PASSING IN DATA
         return template.render()
 
 
     @cherrypy.expose()
     def download(self, day,month,year):
-        template = env.get_template('table.html')
+        template = env.get_template('assets/table.html')
 
         date = '%s%s%s' % (day, month, year)
 
@@ -55,7 +55,7 @@ class Index(object):
 
     @cherrypy.expose()
     def search(self, name, date):
-        template = env.get_template('table.html')
+        template = env.get_template('assets/table.html')
         comp = []
         data = self.r_db.hget('bhavData', date)
         bhav_data = ast.literal_eval(data)
@@ -63,15 +63,20 @@ class Index(object):
             if name.upper() in company['name']:
                 comp.append(company)
 
-        return template.render(data=comp)
+        return template.render(data=comp, date=date)
 
-
-if __name__ == '__main__':
-    conf = {
-        '/': {
-            'tools.sessions.on': True,
-            'tools.staticdir.root': os.path.abspath(os.getcwd())
-        }
+config = {
+    'global': {
+        'server.socket_host': '0.0.0.0',
+        'server.socket_port': int(os.environ.get('PORT', 5000)),
+    },
+    '/assets': {
+        'tools.staticdir.root': os.path.dirname(os.path.abspath(__file__)),
+        'tools.staticdir.on': True,
+        'tools.staticdir.dir': 'assets',
     }
-    # RUN
-    cherrypy.quickstart(Index(), '/', conf)
+}
+# RUN
+cherrypy.quickstart(Index(), '/', config=config)
+   
+    
